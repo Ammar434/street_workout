@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "777745595051",
+    "project_id": "streetworkoutapp-321919",
+    "storage_bucket": "streetworkoutapp-321919.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777745595051:android:65e12648f3727c625c55ee",
+        "android_client_info": {
+          "package_name": "com.example.street_workout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777745595051-o92c817ov77pgo36f8hrpflsgl2der9n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.street_workout",
+            "certificate_hash": "522860a5faf9b97c3c833f7bb16d11b92d6061ed"
+          }
+        },
+        {
+          "client_id": "777745595051-afrffugsc8t5tf6s43camt1skprno7dp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2hnQ4q6zpPM2z_qEuucUu_-rg9BnhfzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777745595051-afrffugsc8t5tf6s43camt1skprno7dp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
