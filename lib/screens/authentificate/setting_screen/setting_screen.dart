@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:street_workout/constants/size_config.dart';
 import 'package:street_workout/constants/style.dart';
-import 'package:street_workout/data/top_street_workers.dart';
+import 'package:street_workout/data/current_user.dart';
 import 'package:street_workout/screens/authentificate/setting_screen/component/settings_group.dart';
 import 'package:street_workout/widgets/vertical_spacing.dart';
 
@@ -29,8 +29,7 @@ class SettingScreen extends StatelessWidget {
                       clipBehavior: Clip.none,
                       children: [
                         CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(topStreetWorkersList[0].image),
+                          backgroundImage: NetworkImage(currentUserImage),
                           maxRadius: SizeConfig.heightMultiplier * 6,
                         ),
                         Positioned(
@@ -53,7 +52,7 @@ class SettingScreen extends StatelessWidget {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      topStreetWorkersList[0].name,
+                      currentUserName,
                       style: TextStyle(
                         color: primaryColor,
                         fontWeight: FontWeight.bold,

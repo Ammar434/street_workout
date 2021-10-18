@@ -54,8 +54,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
                       );
+                      debugPrint(currentUserEmail);
+                      debugPrint(currentUserPassword);
                       context.read<AuthenticationService>().register(
-                            email: currentUserPassword,
+                            email: currentUserEmail,
                             password: currentUserPassword,
                           );
                       //currentUserPassword = "";

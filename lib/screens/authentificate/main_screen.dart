@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:street_workout/firebase/get_data.dart';
 import 'package:street_workout/screens/authentificate/body.dart';
 import 'package:street_workout/screens/authentificate/drawer_screen/drawer_screen.dart';
 
@@ -13,6 +14,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final drawerController = ZoomDrawerController();
+  @override
+  void initState() {
+    GetData().getCurrentUserName();
+    GetData().getCurrentUserProfileImage();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

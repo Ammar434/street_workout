@@ -1,12 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:street_workout/constants/size_config.dart';
 import 'package:street_workout/constants/style.dart';
 import 'package:street_workout/data/top_street_workers.dart';
+import 'package:street_workout/firebase/get_data.dart';
 import 'package:street_workout/screens/authentificate/leaderboard_screen/component/date_widget.dart';
 import 'package:street_workout/screens/authentificate/leaderboard_screen/component/date_widget_name.dart';
 import 'package:street_workout/screens/authentificate/leaderboard_screen/component/rank_tile.dart';
+import 'package:street_workout/widgets/custom_circular_progress_indicator.dart';
 import 'package:street_workout/widgets/vertical_spacing.dart';
 
 import 'component/podium_widget.dart';
@@ -23,18 +26,79 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          children: [
-            const VerticalSpacing(of: 6),
-            buildDateWidgetRow(),
-            const VerticalSpacing(of: 2),
-            buildPodiumStack(),
-            const VerticalSpacing(of: 3),
-            buildRankListView(),
-          ],
-        ),
+      body: FutureBuilder<List<QueryDocumentSnapshot<Map<String, dynamic>>>>(
+        future: GetData().getLeaderboardData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return const Text('Error');
+            } else if (snapshot.hasData) {
+              debugPrint(snapshot.data![0]['name'].toString());
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  children: [
+                    const VerticalSpacing(of: 6),
+                    buildDateWidgetRow(),
+                    const VerticalSpacing(of: 2),
+                    Expanded(
+                      flex: 1,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: 0,
+                            bottom: 0,
+                            child: PodiumWidget(
+                              image: snapshot.data![0]['profileImage'],
+                              color: const Color(0xffC0C0C0),
+                              name: "${snapshot.data![0]['name']}",
+                              podiumImage:
+                                  "assets/images/leaderboard/second.png",
+                              size: 16,
+                            ),
+                          ),
+                          Positioned(
+                            right: 0,
+                            bottom: 0,
+                            child: PodiumWidget(
+                              image: snapshot.data![0]['profileImage'],
+                              color: const Color(0xffCD7F32),
+                              name: "${snapshot.data![0]['name']}",
+                              podiumImage:
+                                  "assets/images/leaderboard/third.png",
+                              size: 16,
+                            ),
+                          ),
+                          Positioned(
+                            top: 0,
+                            left: SizeConfig.widthMultiplier * 48 -
+                                SizeConfig.imageSizeMultiplier * 20,
+                            child: PodiumWidget(
+                              image: snapshot.data![0]['profileImage'],
+                              color: const Color(0xffFFD700),
+                              name: "${snapshot.data![0]['name']}",
+                              podiumImage:
+                                  "assets/images/leaderboard/first.png",
+                              size: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const VerticalSpacing(of: 3),
+                    buildRankListView(),
+                  ],
+                ),
+              );
+            } else {
+              return const Text('Empty data');
+            }
+          } else {
+            return CustomCircularProgressIndicator(
+              isVisible: !snapshot.hasData,
+            );
+          }
+        },
       ),
     );
   }
@@ -169,3 +233,16 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     );
   }
 }
+/*child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            children: [
+              const VerticalSpacing(of: 6),
+              //buildDateWidgetRow(),
+              const VerticalSpacing(of: 2),
+              //buildPodiumStack(),
+              const VerticalSpacing(of: 3),
+              //buildRankListView(),
+            ],
+          ),
+        ),*/

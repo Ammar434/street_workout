@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:street_workout/data/current_user.dart';
 import 'package:street_workout/firebase/user_model.dart';
 import 'package:street_workout/screens/no_authenticate/user_information_gathering/component/display_user_image.dart';
 import 'package:street_workout/screens/no_authenticate/user_information_gathering/component/upload_button.dart';
@@ -24,7 +23,7 @@ class UserInformationGatheringPage3 extends StatefulWidget {
 
 class _UserInformationGatheringPage3State
     extends State<UserInformationGatheringPage3> {
-  String imageUrl = "";
+  String _imageUrl = "";
   void uploadImage() async {
     final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
     final _picker = ImagePicker();
@@ -42,8 +41,7 @@ class _UserInformationGatheringPage3State
       var downloadUrl = await snapshot.ref.getDownloadURL();
       setState(() {
         tmpUser.image = downloadUrl;
-        currentUserImage = downloadUrl;
-        imageUrl = downloadUrl;
+        _imageUrl = downloadUrl;
       });
     } else {}
   }
@@ -61,9 +59,9 @@ class _UserInformationGatheringPage3State
             ),
           ),
           const VerticalSpacing(of: 2),
-          (imageUrl != "")
+          (_imageUrl != "")
               ? DisplayUserImage(
-                  imageUrl: imageUrl,
+                  imageUrl: _imageUrl,
                   onTap: uploadImage,
                 )
               : UploadButton(onTap: uploadImage),

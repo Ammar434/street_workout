@@ -5,7 +5,7 @@ class AuthenticationService {
   final FirebaseAuth firebaseAuth;
   AuthenticationService({required this.firebaseAuth});
 
-  Stream<User?> get authStateChanged => firebaseAuth.authStateChanges();
+  Stream<User?> get authStateChanged => firebaseAuth.idTokenChanges();
   Future<String?> logIn(
       {required String email, required String password}) async {
     try {
