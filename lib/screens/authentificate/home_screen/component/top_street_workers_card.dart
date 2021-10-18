@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:street_workout/constants/size_config.dart';
 import 'package:street_workout/constants/style.dart';
-import 'package:street_workout/data/top_street_workers.dart';
 
 class TopStreetWorkersCard extends StatelessWidget {
   const TopStreetWorkersCard({
     Key? key,
-    required this.index,
+    required this.image,
     required this.press,
+    required this.name,
   }) : super(key: key);
-  final int index;
+  final String image;
+  final String name;
   final GestureTapCallback press;
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class TopStreetWorkersCard extends StatelessWidget {
           children: [
             ClipOval(
               child: Image.network(
-                topStreetWorkersList[index].image,
+                image,
                 height: SizeConfig.heightMultiplier * 8,
                 width: SizeConfig.heightMultiplier * 8,
                 fit: BoxFit.cover,
@@ -32,7 +33,7 @@ class TopStreetWorkersCard extends StatelessWidget {
               height: SizeConfig.heightMultiplier * 1,
             ),
             Text(
-              topStreetWorkersList[index].name,
+              name,
               style: TextStyle(color: primaryColor),
             )
           ],

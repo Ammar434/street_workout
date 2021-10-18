@@ -1,7 +1,7 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:street_workout/constants/screen_to_display.dart';
+import 'package:street_workout/routes/screen_to_display.dart';
 
 DotNavigationBar buildDotNavigationBar(
     var selectedTab, dynamic handleIndexChanged) {

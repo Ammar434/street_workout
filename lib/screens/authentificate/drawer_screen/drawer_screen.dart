@@ -1,12 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:street_workout/constants/screen_to_display.dart';
+import 'package:provider/src/provider.dart';
 import 'package:street_workout/constants/size_config.dart';
 import 'package:street_workout/constants/style.dart';
-import 'package:street_workout/data/top_street_workers.dart';
+import 'package:street_workout/data/current_user.dart';
 import 'package:street_workout/firebase/authentication_service.dart';
 import 'package:street_workout/routes/routes.dart';
+import 'package:street_workout/routes/screen_to_display.dart';
 import 'package:street_workout/screens/authentificate/drawer_screen/component/drawer_item.dart';
 import 'package:street_workout/widgets/vertical_spacing.dart';
 
@@ -36,8 +36,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   padding:
                       EdgeInsets.only(left: SizeConfig.widthMultiplier * 10),
                   child: CircleAvatar(
-                    backgroundImage:
-                        NetworkImage(topStreetWorkersList[0].image),
+                    backgroundImage: NetworkImage(currentUserImage),
                     maxRadius: SizeConfig.heightMultiplier * 3,
                   ),
                 ),
@@ -92,8 +91,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 ),
                 const VerticalSpacing(of: 10),
                 GestureDetector(
-                  onTap: () {
-                    AuthenticationService(FirebaseAuth.instance).signOut();
+                  onTap: () async {
+                    context.read<AuthenticationService>().signOut();
                   },
                   child: Padding(
                     padding:

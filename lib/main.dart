@@ -8,7 +8,7 @@ import 'package:street_workout/constants/style.dart';
 import 'package:street_workout/firebase/authentication_service.dart';
 import 'package:street_workout/routes/routes.dart';
 import 'package:street_workout/screens/authentication_wrapper.dart';
-import 'package:street_workout/screens/no_authentificate/component/user_information_gathering/animation_model.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,36 +25,56 @@ class MyApp extends StatelessWidget {
         return OrientationBuilder(
           builder: (context, orientation) {
             SizeConfig().init(constraints, orientation);
-            return MultiProvider(
-              providers: [
-                Provider<AuthenticationService>(
-                  create: (context) => AuthenticationService(
-                    FirebaseAuth.instance,
+            return ThemeProvider(
+              saveThemesOnChange: true,
+              loadThemeOnInit: true,
+              defaultThemeId: "first_theme",
+              themes: [
+                AppTheme.light(),
+                AppTheme.dark(),
+                AppTheme(
+                  id: "first_theme", // Id(or name) of the theme(Has to be unique)
+                  description: "My Custom Theme", // Description of theme
+                  data: ThemeData(
+                    primaryColor: primaryColor,
+                    disabledColor: Colors.grey,
+                    scaffoldBackgroundColor: backgroundColor,
+                    shadowColor: backgroundColorShade2,
+                    cardColor: backgroundColorShade2,
+                    textTheme: GoogleFonts.montserratTextTheme(
+                      Theme.of(context).textTheme,
+                    ),
                   ),
-                ),
-                StreamProvider(
-                  create: (context) =>
-                      context.read<AuthenticationService>().authStateChanged,
-                  initialData: null,
-                ),
-                ChangeNotifierProvider<AnimationModel>(
-                  create: (context) => AnimationModel(),
                 ),
               ],
-              child: MaterialApp(
-                title: 'Street Workout',
-                debugShowCheckedModeBanner: false,
-                theme: ThemeData(
-                  visualDensity: VisualDensity.adaptivePlatformDensity,
-                  primaryColor: accentColor,
-                  scaffoldBackgroundColor: backgroundColor,
-                  textTheme: GoogleFonts.montserratTextTheme(
-                    Theme.of(context).textTheme,
-                  ),
+              child: ThemeConsumer(
+                child: Builder(
+                  builder: (themeContext) {
+                    return MultiProvider(
+                      providers: [
+                        Provider<AuthenticationService>(
+                          create: (_) => AuthenticationService(
+                            firebaseAuth: FirebaseAuth.instance,
+                          ),
+                        ),
+                        StreamProvider(
+                          create: (context) => context
+                              .read<AuthenticationService>()
+                              .authStateChanged,
+                          initialData: null,
+                        ),
+                      ],
+                      child: MaterialApp(
+                        title: 'Street Workout',
+                        debugShowCheckedModeBanner: false,
+                        theme: ThemeProvider.themeOf(themeContext).data,
+                        onGenerateRoute: routeController,
+                        home:
+                            const AuthenticationWrapper(), //ProductDescriptionScreen(),
+                      ),
+                    );
+                  },
                 ),
-                onGenerateRoute: routeController,
-                home:
-                    const AuthenticationWrapper(), //ProductDescriptionScreen(),
               ),
             );
           },

@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:street_workout/constants/size_config.dart';
-import 'package:street_workout/data/parcs_spots.dart';
+import 'package:street_workout/data/machine_available.dart';
 
 class MachineAvailableWidget extends StatelessWidget {
   const MachineAvailableWidget({
     Key? key,
-    required this.i,
+    required this.machineList,
   }) : super(key: key);
-  final int i;
+  final List machineList;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         ...List.generate(
-          parcsSpotsList[i].machineAvailable.length,
+          machineList.length,
           (index) => buildMachineAvailableIcon(index),
         ),
       ],
@@ -29,7 +30,7 @@ class MachineAvailableWidget extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.contain,
           image: AssetImage(
-            parcsSpotsList[i].machineAvailable[index].image,
+            machineAvailable[machineList[index]]!.image,
           ),
         ),
       ),

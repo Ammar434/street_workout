@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.street_workout">
-   <application
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
         android:label="street_workout"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -40,5 +41,6 @@
        <meta-data
            android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyDM3_gXa6Csy7l6o2ZRYBo3WytHI7g3OeQ"/>
-    </application>
+       android:usesCleartextTraffic="true"
+   </application>
 </manifest>

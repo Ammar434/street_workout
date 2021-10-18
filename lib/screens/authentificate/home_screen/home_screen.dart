@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
           ),
           const VerticalSpacing(of: 1),
           const TopStreetWorkers(),
-          const VerticalSpacing(of: 20),
+          const VerticalSpacing(of: 5),
         ],
       ),
     );

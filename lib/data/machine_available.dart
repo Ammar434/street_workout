@@ -4,10 +4,15 @@ class MachineAvailable {
   MachineAvailable({required this.name, required this.image});
 }
 
-// Demo List of Top Travelers
-//List<MachineAvailable> topTravelers = [user1, user2, user3, user4];
+Map<String, MachineAvailable> machineAvailable = {
+  'traction': machineAvailable1,
+  'dips': machineAvailable2,
+  'mediumBar': machineAvailable3,
+  'banc': machineAvailable4,
+  'monkeyBar': machineAvailable5,
+  'highVerticalBar': machineAvailable6,
+};
 
-// demo user
 MachineAvailable machineAvailable1 = MachineAvailable(
     name: "Traction", image: "assets/images/exercices/image _exercice1.png");
 MachineAvailable machineAvailable2 = MachineAvailable(

@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:street_workout/constants/size_config.dart';
 import 'package:street_workout/constants/style.dart';
-import 'package:street_workout/data/parcs_spots.dart';
-
-import 'machine_available_widget.dart';
+import 'package:street_workout/screens/authentificate/home_screen/component/machine_available_widget.dart';
 
 class ParcDisplayCard extends StatelessWidget {
   const ParcDisplayCard({
     Key? key,
-    required this.index,
+    required this.image,
     required this.press,
+    required this.name,
+    required this.machineAvailableList,
   }) : super(key: key);
-  final int index;
+  final String image;
   final GestureTapCallback press;
+  final String name;
+  final List machineAvailableList;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -23,7 +25,7 @@ class ParcDisplayCard extends StatelessWidget {
         child: Column(
           children: [
             AspectRatio(
-              aspectRatio: 1.3,
+              aspectRatio: 1.5,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -31,7 +33,7 @@ class ParcDisplayCard extends StatelessWidget {
                     topRight: Radius.circular(SizeConfig.widthMultiplier * 3),
                   ),
                   image: DecorationImage(
-                    image: AssetImage(parcsSpotsList[index].image[0]),
+                    image: NetworkImage(image),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -51,7 +53,7 @@ class ParcDisplayCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    parcsSpotsList[index].name,
+                    name,
                     style: TextStyle(
                       color: primaryColor,
                       fontSize: SizeConfig.textMultiplier * 1.8,
@@ -60,7 +62,7 @@ class ParcDisplayCard extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   MachineAvailableWidget(
-                    i: index,
+                    machineList: machineAvailableList,
                   )
                 ],
               ),

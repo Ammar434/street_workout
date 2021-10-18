@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:street_workout/component/app_bar.dart';
 import 'package:street_workout/component/bottom_nav_bar.dart';
-import 'package:street_workout/constants/screen_to_display.dart';
-import 'package:street_workout/constants/style.dart';
+import 'package:street_workout/routes/screen_to_display.dart';
 
 class Body extends StatefulWidget {
   const Body({
@@ -32,30 +31,24 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getData(),
-      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        return Scaffold(
-          appBar: buildAppBar(widget.zoomDrawerController),
-          extendBody: true,
-          extendBodyBehindAppBar: true,
-          bottomNavigationBar:
-              buildDotNavigationBar(selectedTab, _handleIndexChanged),
-          body: snapshot.connectionState == ConnectionState.done
-              ? screenToDisplay(
-                  selectedTab.index,
-                )
-              : Container(
-                  color: backgroundColor,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: primaryColor,
-                      color: accentColor,
-                    ),
-                  ),
-                ),
-        );
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
       },
+      child: Scaffold(
+        appBar: buildAppBar(widget.zoomDrawerController),
+        extendBody: true,
+        extendBodyBehindAppBar: true,
+        bottomNavigationBar:
+            buildDotNavigationBar(selectedTab, _handleIndexChanged),
+        body: screenToDisplay(
+          selectedTab.index,
+        ),
+      ),
     );
   }
 }

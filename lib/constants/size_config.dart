@@ -11,6 +11,7 @@ class SizeConfig {
   static double imageSizeMultiplier = 0;
   static double heightMultiplier = 0;
   static double widthMultiplier = 0;
+  static double borderRadiusMultiplier = 0;
   static bool isPortrait = true;
   static bool isMobilePortrait = false;
 
@@ -33,6 +34,7 @@ class SizeConfig {
     _blockHeight = _screenHeight / 100;
 
     textMultiplier = _blockHeight;
+    borderRadiusMultiplier = _blockHeight;
     imageSizeMultiplier = _blockWidth;
     heightMultiplier = _blockHeight;
     widthMultiplier = _blockWidth;

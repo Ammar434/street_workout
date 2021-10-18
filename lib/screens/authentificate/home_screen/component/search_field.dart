@@ -10,6 +10,9 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+      },
       decoration: InputDecoration(
         hintText: "Trouve ton parc",
         hintStyle: TextStyle(
