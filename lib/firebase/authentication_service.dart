@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:street_workout/firebase/get_data.dart';
 
 class AuthenticationService {
   final FirebaseAuth firebaseAuth;
@@ -42,6 +43,18 @@ class AuthenticationService {
       return "Signed In";
     } on FirebaseAuthException catch (e) {
       return e.message;
+    }
+  }
+
+  Future<String?> deleteUser() async {
+    try {
+      await firebaseAuth.currentUser!.delete();
+      await GetData().deleteUserDataFromStorage();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        debugPrint(
+            'The user must reauthenticate before this operation can be executed.');
+      }
     }
   }
 }

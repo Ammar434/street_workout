@@ -16,10 +16,9 @@ class _MainScreenState extends State<MainScreen> {
   final drawerController = ZoomDrawerController();
   @override
   void initState() {
+    super.initState();
     GetData().getCurrentUserName();
     GetData().getCurrentUserProfileImage();
-
-    super.initState();
   }
 
   @override

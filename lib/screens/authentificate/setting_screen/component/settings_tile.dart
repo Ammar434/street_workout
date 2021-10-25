@@ -22,11 +22,11 @@ class SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Padding(
-        padding:
-            EdgeInsets.symmetric(vertical: SizeConfig.heightMultiplier * 1.5),
+    return Padding(
+      padding:
+          EdgeInsets.symmetric(vertical: SizeConfig.heightMultiplier * 1.5),
+      child: GestureDetector(
+        onTap: press,
         child: Row(
           children: [
             CircleAvatar(

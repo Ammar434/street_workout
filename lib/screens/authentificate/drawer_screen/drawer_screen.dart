@@ -5,6 +5,7 @@ import 'package:street_workout/constants/size_config.dart';
 import 'package:street_workout/constants/style.dart';
 import 'package:street_workout/data/current_user.dart';
 import 'package:street_workout/firebase/authentication_service.dart';
+import 'package:street_workout/firebase/get_data.dart';
 import 'package:street_workout/routes/routes.dart';
 import 'package:street_workout/routes/screen_to_display.dart';
 import 'package:street_workout/screens/authentificate/drawer_screen/component/drawer_item.dart';
@@ -18,6 +19,12 @@ class DrawerScreen extends StatefulWidget {
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
+  @override
+  void initState() {
+    GetData().getCurrentUserName();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,6 +100,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 GestureDetector(
                   onTap: () async {
                     context.read<AuthenticationService>().signOut();
+                 Navigator.of(context).pop();
                   },
                   child: Padding(
                     padding:

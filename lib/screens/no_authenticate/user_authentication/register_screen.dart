@@ -60,6 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             email: currentUserEmail,
                             password: currentUserPassword,
                           );
+                      Navigator.pop(context);
                       //currentUserPassword = "";
                       //currentUserValidationPassword = "";
                       //currentUserEmail = "";

@@ -157,13 +157,10 @@ class LogInFooter extends StatelessWidget {
                 const SnackBar(content: Text('Processing Data')),
               );
               context.read<AuthenticationService>().logIn(
-                    email: currentUserPassword,
+                    email: currentUserEmail,
                     password: currentUserPassword,
                   );
-              debugPrint(firebaseUser?.uid.toString());
-              currentUserPassword = "";
-              currentUserValidationPassword = "";
-              currentUserEmail = "";
+              Navigator.of(context).pop();
             }
           },
         ),

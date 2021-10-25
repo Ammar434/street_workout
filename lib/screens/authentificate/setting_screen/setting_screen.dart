@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 import 'package:street_workout/constants/size_config.dart';
 import 'package:street_workout/constants/style.dart';
 import 'package:street_workout/data/current_user.dart';
+import 'package:street_workout/firebase/authentication_service.dart';
 import 'package:street_workout/screens/authentificate/setting_screen/component/settings_group.dart';
 import 'package:street_workout/widgets/vertical_spacing.dart';
 
@@ -13,13 +15,12 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier * 2),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Scaffold(
+      body: Padding(
+        padding:
+            EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier * 2),
+        child: ListView(
           children: [
-            const VerticalSpacing(of: 5),
             SizedBox(
               height: SizeConfig.heightMultiplier * 20,
               child: Row(
@@ -73,7 +74,9 @@ class SettingScreen extends StatelessWidget {
                   text1: "Account Settings",
                   text2: "Privacy, Security, Language",
                   isArrow: true,
-                  press: () {},
+                  press: () {
+                    debugPrint("Hello");
+                  },
                 ),
                 SettingsTile(
                   icon: Icons.notifications,
@@ -89,7 +92,10 @@ class SettingScreen extends StatelessWidget {
                   text1: "Logout",
                   text2: "",
                   isArrow: false,
-                  press: () {},
+                  press: () {
+                    context.read<AuthenticationService>().signOut();
+                    Navigator.of(context).pop();
+                  },
                 ),
                 SettingsTile(
                   icon: Icons.delete,
@@ -97,7 +103,11 @@ class SettingScreen extends StatelessWidget {
                   text1: "Delete Account",
                   text2: "",
                   isArrow: false,
-                  press: () {},
+                  press: () {
+                    context.read<AuthenticationService>().deleteUser();
+
+                    Navigator.of(context).pop();
+                  },
                 ),
               ],
             ),
@@ -123,6 +133,7 @@ class SettingScreen extends StatelessWidget {
                 ),
               ],
             ),
+            const VerticalSpacing(of: 2),
           ],
         ),
       ),

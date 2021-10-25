@@ -49,9 +49,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                             left: 0,
                             bottom: 0,
                             child: PodiumWidget(
-                              image: snapshot.data![0]['profileImage'],
+                              image: snapshot.data![1]['profileImage'],
                               color: const Color(0xffC0C0C0),
-                              name: "${snapshot.data![0]['name']}",
+                              name: "${snapshot.data![1]['name']}",
                               podiumImage:
                                   "assets/images/leaderboard/second.png",
                               size: 16,
@@ -61,9 +61,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                             right: 0,
                             bottom: 0,
                             child: PodiumWidget(
-                              image: snapshot.data![0]['profileImage'],
+                              image: snapshot.data![2]['profileImage'],
                               color: const Color(0xffCD7F32),
-                              name: "${snapshot.data![0]['name']}",
+                              name: "${snapshot.data![2]['name']}",
                               podiumImage:
                                   "assets/images/leaderboard/third.png",
                               size: 16,
