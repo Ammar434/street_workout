@@ -9,6 +9,7 @@ import 'package:street_workout/widgets/vertical_spacing.dart';
 
 import 'component/user_information_gathering_list.dart';
 
+//TODO: erreur lors du comptage sur cercle
 class UserInformationGathering extends StatefulWidget {
   const UserInformationGathering({Key? key}) : super(key: key);
   static const String name = "userInformationGatheringScreen";

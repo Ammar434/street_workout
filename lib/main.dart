@@ -36,11 +36,18 @@ class MyApp extends StatelessWidget {
                   id: "first_theme", // Id(or name) of the theme(Has to be unique)
                   description: "My Custom Theme", // Description of theme
                   data: ThemeData(
+                    appBarTheme: const AppBarTheme(
+                      color: Colors.transparent,
+                      iconTheme: IconThemeData(
+                        color: Colors.white,
+                      ),
+                    ),
                     primaryColor: primaryColor,
                     disabledColor: Colors.grey,
                     scaffoldBackgroundColor: backgroundColor,
                     shadowColor: backgroundColorShade2,
                     cardColor: backgroundColorShade2,
+                    hintColor: accentColor,
                     textTheme: GoogleFonts.montserratTextTheme(
                       Theme.of(context).textTheme,
                     ),

@@ -5,6 +5,7 @@ import 'package:street_workout/constants/size_config.dart';
 import 'package:street_workout/constants/style.dart';
 import 'package:street_workout/data/current_user.dart';
 import 'package:street_workout/firebase/authentication_service.dart';
+import 'package:street_workout/routes/routes.dart';
 import 'package:street_workout/screens/authentificate/setting_screen/component/settings_group.dart';
 import 'package:street_workout/widgets/vertical_spacing.dart';
 
@@ -36,13 +37,18 @@ class SettingScreen extends StatelessWidget {
                         Positioned(
                           right: -5,
                           top: 0,
-                          child: CircleAvatar(
-                            backgroundColor: primaryColor,
-                            maxRadius: SizeConfig.heightMultiplier * 2,
-                            child: Center(
-                              child: Icon(
-                                Icons.edit,
-                                color: backgroundColor,
+                          child: GestureDetector(
+                            onTap: () {
+                              debugPrint("Change image");
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: primaryColor,
+                              maxRadius: SizeConfig.heightMultiplier * 2,
+                              child: Center(
+                                child: Icon(
+                                  Icons.edit,
+                                  color: backgroundColor,
+                                ),
                               ),
                             ),
                           ),
@@ -72,10 +78,10 @@ class SettingScreen extends StatelessWidget {
                   icon: Icons.person,
                   iconBackgroundColor: Colors.green,
                   text1: "Account Settings",
-                  text2: "Privacy, Security, Language",
+                  text2: "Changer your personal data",
                   isArrow: true,
                   press: () {
-                    debugPrint("Hello");
+                    Navigator.pushNamed(context, accountSetting);
                   },
                 ),
                 SettingsTile(

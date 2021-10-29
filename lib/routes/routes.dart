@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:street_workout/screens/authentificate/main_screen.dart';
 import 'package:street_workout/screens/authentificate/parc_description_screen/parc_description_screen.dart';
+import 'package:street_workout/screens/authentificate/setting_screen/account_setting.dart';
 import 'package:street_workout/screens/authentificate/user_description_screen/user_description_screen.dart';
 import 'package:street_workout/screens/no_authenticate/user_authentication/auth_screen.dart';
 import 'package:street_workout/screens/no_authenticate/user_authentication/login_screen.dart';
@@ -15,6 +16,7 @@ const String userInformationGathering = UserInformationGathering.name;
 const String authScreen = AuthScreen.name;
 const String loginScreen = LoginScreen.name;
 const String registerScreen = RegisterScreen.name;
+const String accountSetting = AccountSetting.name;
 Route<dynamic> routeController(RouteSettings settings) {
   switch (settings.name) {
     case mainScreen:
@@ -56,6 +58,10 @@ Route<dynamic> routeController(RouteSettings settings) {
     case registerScreen:
       return MaterialPageRoute(
         builder: (context) => const RegisterScreen(),
+      );
+    case accountSetting:
+      return MaterialPageRoute(
+        builder: (context) => const AccountSetting(),
       );
     default:
       throw ("Not exist");
